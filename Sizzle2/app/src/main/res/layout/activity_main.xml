@@ -1,28 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
-    android:orientation="vertical"
-    android:weightSum="10"
     tools:context="com.example.sizzle.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_weight="9"
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent" />
-
     <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="140dp"
-        android:id="@+id/btnCamera"
-        android:text="Camera" />
+        android:id="@+id/button_first"
+        android:layout_width="165dp"
+        android:layout_height="54dp"
+        android:fontFamily="@font/open_sans"
+        android:text="GET STARTED"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_first"
+        app:layout_constraintVertical_bias="0.315" />
 
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="87dp"
+        android:layout_height="193dp"
+        app:srcCompat="@drawable/fire"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="157dp" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/textview_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="332dp"
+        android:fontFamily="@font/open_sans_semibold"
+        android:text="SIZZLE"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
