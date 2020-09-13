@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnCamera = (Button)findViewById(R.id.btnCamera);
-        imageView = (ImageView)findViewById(R.id.imageView);
+//        imageView = (ImageView)findViewById(R.id.imageView);
 
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,8 +43,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bitmap photo = (Bitmap)data.getExtras().get("data");
-        imageView.setImageBitmap(photo);
+//        Bitmap photo = (Bitmap)data.getExtras().get("data");
+//        imageView.setImageBitmap(photo);
+
+
     }
 
 }
