@@ -79,8 +79,8 @@
         android:layout_above="@+id/btnCamera"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="162dp"
-        android:layout_marginLeft="162dp"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
         android:layout_marginBottom="30dp"
         app:srcCompat="@drawable/yelp_logo" />
 
