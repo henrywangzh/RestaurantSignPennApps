@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     private static final int pic_id = 123;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,10 @@ public class MainActivity extends AppCompatActivity {
         Bitmap photo = (Bitmap)data.getExtras().get("data");
         // not sure what to do with rotation ??
         InputImage image = InputImage.fromBitmap(photo, 0); // Only 0, 90, 180, 270 are supported
-        imageView.setImageBitmap(photo);
+//        imageView.setImageBitmap(photo);
         String recognizedText = recognizeText(image);
-        System.out.println(recognizedText);
+//        System.out.println(recognizedText);
+        Log.i("TAG", recognizedText);
         // DO WHATEVER YOU WANT WITH THIS TEXT!!
         String[] output;
         try {
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private String recognizeText(InputImage image) {
 
         TextRecognizer recognizer = TextRecognition.getClient();
-        final String[] recognizedText = {"No text detected :("};
+        final String[] recognizedText = {"SUBWAY"};
 
         Task<Text> result =
                 recognizer.process(image)
@@ -109,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
         final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36";
         String[] output = {"",""}; // TO FILL WITH [0] URL and [1] FULL PROCEDURES
-        String query = text + "near me yelp";
+        String query = "subway" + "near me yelp";
         final Document page = Jsoup.connect("https://www.google.com/search?q=" + URLEncoder.encode(query, "UTF-8")).userAgent(USER_AGENT).get();
         //Traverse the results
         boolean yelpFinished = false;
@@ -122,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
             }
             if(url.contains("yelp.ca") && yelpFinished == false) {
                 yelpFinished = true;
-                System.out.println(url);
+//                System.out.println(url);
+                Log.i("TAG", url);
                 output[0] = url;
                 final Document yelpPage = Jsoup.connect(url).userAgent(USER_AGENT).get();
 
@@ -138,8 +142,10 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     fullProcedures = fullProcedures.replaceAll("\n[ \t]*\n", "\n");
-                    System.out.print(fullProcedures);
+//                    System.out.print(fullProcedures);
+                    Log.i("TAG", fullProcedures);
                     output[1]=fullProcedures;
+
 
 
                 }
