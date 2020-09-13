@@ -58,11 +58,13 @@ public class MainActivity extends AppCompatActivity {
         String recognizedText = recognizeText(image);
         System.out.println(recognizedText);
         // DO WHATEVER YOU WANT WITH THIS TEXT!!
+        String[] output;
         try {
-            getUrlAndCovidProcedures(recognizedText);
+            output = getUrlAndCovidProcedures(recognizedText);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // USE OUTPUT FOR APP
     }
 
     private String recognizeText(InputImage image) {
@@ -103,9 +105,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public static void getUrlAndCovidProcedures(String text) throws Exception {
+    public static String[] getUrlAndCovidProcedures(String text) throws Exception {
 
         final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.89 Safari/537.36";
+        String[] output = {"",""}; // TO FILL WITH [0] URL and [1] FULL PROCEDURES
         String query = text + "near me yelp";
         final Document page = Jsoup.connect("https://www.google.com/search?q=" + URLEncoder.encode(query, "UTF-8")).userAgent(USER_AGENT).get();
         //Traverse the results
@@ -115,11 +118,12 @@ public class MainActivity extends AppCompatActivity {
 
             final String url = result.attr("href");
             if(!url.contains("google") && !url.contains("search") && !url.contains("#")) {
-                System.out.println(url);
+                //System.out.println(url);
             }
             if(url.contains("yelp.ca") && yelpFinished == false) {
                 yelpFinished = true;
                 System.out.println(url);
+                output[0] = url;
                 final Document yelpPage = Jsoup.connect(url).userAgent(USER_AGENT).get();
 
                 Element result2 = yelpPage.select("section").first();
@@ -135,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
 
                     fullProcedures = fullProcedures.replaceAll("\n[ \t]*\n", "\n");
                     System.out.print(fullProcedures);
+                    output[1]=fullProcedures;
+
 
                 }
 
@@ -142,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-
+        return output;
     }
 
     // For string processing in case you feel as if the total text needs to be processed more !
